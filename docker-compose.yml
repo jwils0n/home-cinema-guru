@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+  guru-postgres:
+    image: "postgres:9.6-alpine"
+    container_name: guru-postgres
+    volumes:
+      - guru-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=guru
+      - POSTGRES_USER=guru
+      - POSTGRES_PASSWORD=guru
+
+  guru-app:
+    build: ./app
+    container_name: guru-app
+    environment:
+      - DB_SERVER=guru-postgres
+      - POSTGRES_DB=guru
+      - POSTGRES_USER=guru
+      - POSTGRES_PASSWORD=guru
+    ports:
+      - 8080:8080
+    links:
+      - guru-postgres
+
+  guru-ui:
+    build: ./ui
+    container_name: guru-ui
+    ports:
+      - 4200:80
+    links:
+      - guru-app
+
+
+volumes:
+  guru-data:

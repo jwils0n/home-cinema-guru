@@ -1,1 +1,1 @@
-# home-cinema-wizard
+# home-cinema-guru
