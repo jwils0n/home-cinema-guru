@@ -29,6 +29,9 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/guru-app:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/guru-app:latest
       - run:
+          name: Fingerprint hack
+          command: echo '39:69:6d:d3:38:05:f5:b7:c3:d2:16:88:1d:af:ba:39' >> ~/.ssh/known_hosts
+      - run:
           name: Deploy app to stage
           command: |
             scp docker-compose.prod.yml circleci@$GURU_STAGE_IP:./
