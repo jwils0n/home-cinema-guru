@@ -3,8 +3,7 @@ jobs:
   build:
     filters:
       branches:
-        only: master
-    working_directory: /home-cinema-guru
+        only: master]
     docker:
       - image: cimg/node:12.18
     steps:
