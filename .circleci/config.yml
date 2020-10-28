@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  buildAndDeploy:
+  build:
     filters:
       branches:
         only: master
