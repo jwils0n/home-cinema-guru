@@ -5,7 +5,7 @@ jobs:
       branches:
         only: master
     docker:
-      - image: cimg/node:14.15
+      - image: circleci/node:jessie
     steps:
       - checkout
       - setup_remote_docker
