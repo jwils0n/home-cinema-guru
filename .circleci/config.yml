@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    filters:
-      branches:
-        only: master
     docker:
       - image: circleci/node:jessie
     steps:
