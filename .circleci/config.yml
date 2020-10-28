@@ -6,9 +6,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - add_ssh_keys:
-          fingerprints:
-              - "a2:78:37:a3:68:c9:b7:f8:12:64:0e:b7:9b:b1:a2:d5"
       - run:
           name: run tests
           command: |
@@ -29,9 +26,7 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/guru-app:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/guru-app:latest
       - run:
-          name: Fingerprint hack
-          command: echo '39:69:6d:d3:38:05:f5:b7:c3:d2:16:88:1d:af:ba:39' >> ~/.ssh/known_hosts
-      - run:
           name: Deploy app to stage
           command: |
+            ssh-keyscan -H $GURU_STAGE_IP >> ~/.ssh/known_hosts
             scp docker-compose.prod.yml circleci@$GURU_STAGE_IP:./
