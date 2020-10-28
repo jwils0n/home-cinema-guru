@@ -30,3 +30,4 @@ jobs:
           command: |
             ssh-keyscan -H $GURU_STAGE_IP >> ~/.ssh/known_hosts
             scp docker-compose.prod.yml circleci@$GURU_STAGE_IP:./
+            ssh circleci@$GURU_STAGE_IP "docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD" && docker pull jdwilson2005/guru-app && docker pull jdwilson2005/guru-ui && docker-compose down && docker-compose -f docker-compose.prod.yml up -d
