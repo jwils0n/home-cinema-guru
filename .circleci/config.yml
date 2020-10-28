@@ -9,6 +9,7 @@ jobs:
       - run:
           name: run tests
           command: |
+            docker-compose build
             docker-compose up -d
             docker-compose run guru-app npm test
       - deploy:
