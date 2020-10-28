@@ -12,6 +12,7 @@ jobs:
             docker-compose build
             docker-compose up -d
             docker-compose run guru-app npm test
+            docker-compose logs
       - deploy:
           name: Push app Docker image
           command: |
