@@ -4,6 +4,7 @@ jobs:
     filters:
       branches:
         only: master
+    working_directory: /home-cinema-guru
     docker:
       - image: docker:17.05.0-ce-git
     steps:
