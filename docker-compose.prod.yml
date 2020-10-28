@@ -1,8 +1,7 @@
 version: '3'
 services:
   guru-app:
-    build: ./app
-    container_name: guru-app
+    image: jdwilson2005/guru-app
     environment:
       - DB_SERVER=guru-postgres
       - POSTGRES_DB=guru
@@ -12,8 +11,7 @@ services:
       - 8080:8080
 
   guru-ui:
-    build: ./ui
-    container_name: guru-ui
+    image: jdwilson2005/guru-ui
     ports:
       - 80:80
     links:

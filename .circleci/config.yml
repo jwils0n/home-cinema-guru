@@ -13,7 +13,7 @@ jobs:
             docker-compose up -d
             docker-compose run guru-app npm test
             docker-compose logs
-      - deploy:
+      - publish:
           name: Push app Docker image
           command: |
             docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD
@@ -25,3 +25,7 @@ jobs:
             docker push $DOCKER_HUB_USER_ID/guru-ui:latest
             docker push $DOCKER_HUB_USER_ID/guru-app:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/guru-app:latest
+      - deploy:
+          name: Deploy app to stage
+          command: |
+            scp docker-compose.prod.yml circleci@$GURU_STAGE_IP:./
