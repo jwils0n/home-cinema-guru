@@ -3,9 +3,9 @@ jobs:
   build:
     filters:
       branches:
-        only: master]
+        only: master
     docker:
-      - image: cimg/node:12.18
+      - image: cimg/node:14.15
     steps:
       - checkout
       - setup_remote_docker
