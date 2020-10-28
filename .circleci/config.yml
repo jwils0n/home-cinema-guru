@@ -1,6 +1,9 @@
 version: 2
 jobs:
-  build:
+  buildAndDeploy:
+    filters:
+      branches:
+        only: master
     working_directory: /home-cinema-guru
     docker:
       - image: docker:17.05.0-ce-git
@@ -23,8 +26,8 @@ jobs:
             docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
             docker tag home-cinema-guru_guru-ui $DOCKER_HUB_USER_ID/guru-ui:$CIRCLE_SHA1
             docker tag home-cinema-guru_guru-ui $DOCKER_HUB_USER_ID/guru-ui:latest
-            docker tag home-cinema-guru_guru-app $DOCKER_HUB_USER_ID/guru-ui:$CIRCLE_SHA1
-            docker tag home-cinema-guru_guru-app $DOCKER_HUB_USER_ID/guru-ui:latest
+            docker tag home-cinema-guru_guru-app $DOCKER_HUB_USER_ID/guru-app:$CIRCLE_SHA1
+            docker tag home-cinema-guru_guru-app $DOCKER_HUB_USER_ID/guru-app:latest
             docker push $DOCKER_HUB_USER_ID/guru-ui:$CIRCLE_SHA1
             docker push $DOCKER_HUB_USER_ID/guru-ui:latest
             docker push $DOCKER_HUB_USER_ID/guru-app:$CIRCLE_SHA1
