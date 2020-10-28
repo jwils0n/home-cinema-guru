@@ -13,7 +13,7 @@ jobs:
             docker-compose up -d
             docker-compose run guru-app npm test
             docker-compose logs
-      - build:
+      - run:
           name: Push app Docker image
           command: |
             docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD
