@@ -18,7 +18,7 @@ services:
     build: ./app
     container_name: guru-app
     env_file:
-      - config.dev.env
+      - ./config.dev.env
     ports:
       - 8080:8080
     links:
