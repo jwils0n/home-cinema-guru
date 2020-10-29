@@ -10,11 +10,41 @@ services:
       - POSTGRES_PASSWORD=guru
     ports:
       - 8080:8080
+    networks:
+      - app-network
 
   guru-ui:
     build: ./ui
     container_name: guru-ui
+    restart: unless-stopped
     ports:
       - 80:80
     links:
       - guru-app
+    networks:
+      - app-network
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/usr/share/nginx/html
+    depends_on:
+      - guru-app
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html --email jdwilson2005@gmail.com --agree-tos --no-eff-email --staging -d homecinema.guru  -d www.homecinema.guru
+
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /
+      o: bind
+
+networks:
+  app-network:
+    driver: bridge
