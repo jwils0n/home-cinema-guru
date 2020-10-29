@@ -2,6 +2,7 @@
 FROM node:12.7-alpine AS build
 WORKDIR /usr/src/app
 COPY package.json ./
+RUN apk add --no-cache bash
 RUN npm install
 COPY . .
 # RUN npm run build
