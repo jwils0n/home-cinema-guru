@@ -2,8 +2,8 @@ const express = require('express');
 const { Client } = require('pg');
 
 // Constants
-const PORT = process.env.APP_PORT;
-const HOST = process.env.APP_HOST;
+const PORT = 8080;
+const HOST = '0.0.0.0';
 
 const dbParams = {
   user: process.env.POSTGRES_USER,
