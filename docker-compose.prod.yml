@@ -2,11 +2,8 @@ version: '3'
 services:
   guru-app:
     image: jdwilson2005/guru-app
-    environment:
-      - DB_SERVER=guru-postgres
-      - POSTGRES_DB=guru
-      - POSTGRES_USER=guru
-      - POSTGRES_PASSWORD=guru
+    env_file:
+      - ./config.prod.env
     ports:
       - 8080:8080
     networks:
