@@ -2,6 +2,8 @@ version: '3'
 services:
   guru-app:
     image: jdwilson2005/guru-app
+    env_file:
+      - ./config.prod.env
     ports:
       - 8080:8080
     networks:
