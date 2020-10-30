@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  build_master:
     docker:
       - image: circleci/node:jessie
     steps:
@@ -37,3 +37,13 @@ jobs:
             ssh-keyscan -H $GURU_BLUE_IP >> ~/.ssh/known_hosts
             scp docker-compose.prod.yml circleci@$GURU_BLUE_IP:.
             ssh circleci@$GURU_BLUE_IP "printf 'POSTGRES_HOST=$POSTGRES_HOST\nPOSTGRES_PORT=$POSTGRES_PORT\nPOSTGRES_DB=$POSTGRES_DB\nPOSTGRES_USER=$POSTGRES_USER\nPOSTGRES_PASS=$POSTGRES_PASS\nPOSTGRES_SSL=$POSTGRES_SSL' > config.prod.env && docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD && docker pull jdwilson2005/guru-app && docker pull jdwilson2005/guru-ui && docker-compose -f docker-compose.prod.yml up -d"
+
+workflows:
+  version: 2
+  build_master:
+    jobs:
+      - build_master
+          filters:
+            branches:
+              only:
+                - master
