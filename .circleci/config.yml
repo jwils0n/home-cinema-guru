@@ -47,3 +47,7 @@ workflows:
             branches:
               only:
                 - master
+              ignore:
+                - develop
+                - /feature-.*/
+                - /rc-.*/
