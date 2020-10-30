@@ -35,7 +35,7 @@ jobs:
           name: Deploy to green
           command: |
             ssh-keyscan -H $GURU_GREEN_IP >> ~/.ssh/known_hosts
-            ssh circleci@$GURU_GREEN_IP "docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD && docker pull jdwilson2005/guru-app && docker pull jdwilson2005/guru-ui && docker-compose -f docker-compose.prod.yml down && docker-compose -f docker-compose.prod.yml up -d"
+            ssh circleci@$GURU_GREEN_IP "docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD && docker pull jdwilson2005/guru-app && docker pull jdwilson2005/guru-ui && docker-compose -f docker-compose.prod.yml up -d"
       - run:
           name: Deploy to blue
           command: |
