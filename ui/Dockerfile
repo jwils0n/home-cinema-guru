@@ -1,13 +1,13 @@
-### STAGE 1: Build ###
+### STAGE 1: Build UI app ###
 FROM node:12.7-alpine AS build
 WORKDIR /usr/src/app
 COPY package.json ./
-RUN npm install
+RUN yarn
 COPY . .
-# RUN npm run build
+RUN yarn build
 
-### STAGE 2: Run ###
+### STAGE 2: Run NGINX server ###
 FROM nginx:1.17.1-alpine
 COPY default.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /usr/src/app/src /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
 EXPOSE 80

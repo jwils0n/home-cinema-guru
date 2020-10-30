@@ -1,3 +1,8 @@
+.DS_STORE
+
+
+ui/dist
+
 
 # Logs
 logs
