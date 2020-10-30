@@ -1,3 +1,3 @@
 console.log('App initialized');
 
-document.getElementById('root').innerHTML = 'Javascript!'
+document.getElementById('root').innerHTML = 'Injecting Javascript!'
