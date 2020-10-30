@@ -6,8 +6,8 @@ export default class Wrapper extends React.Component {
     constructor(props) {
         super(props);
 
-        axios.get('/api').then(resp => {
-            this.setState({ rows: resp });
+        axios.get('/api').then(({ data }) => {
+            this.setState({ rows: data });
         });
 
         this.state = { rows: [] };
