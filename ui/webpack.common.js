@@ -1,5 +1,4 @@
 const path = require('path');
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -7,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const distPath = path.resolve(__dirname, './dist');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/js/index.js',
     output: {
         filename: 'bundle.[contenthash].js',
         path: distPath,
@@ -21,20 +20,33 @@ module.exports = {
                 test: /\.(png|jpg)$/,
                 use: ['file-loader']
             },
-            {
+            { // global styles
                 test: /\.scss$/,
+                include: [path.resolve(__dirname, './src/scss')],
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+            },
+            { // component styles
+                test: /\.scss$/,
+                exclude: [path.resolve(__dirname, './src/scss')],
                 use: [
-                    MiniCssExtractPlugin, 'css-loader', 'sass-loader'
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    },
+                    'sass-loader'
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: [
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['@babel/env'],
+                            presets: ['@babel/env', '@babel/preset-react'],
                             plugins: ['transform-class-properties']
                         }
                     }
@@ -49,10 +61,9 @@ module.exports = {
     },
 
     plugins: [
-        new TerserPlugin(),
-        // new MiniCssExtractPlugin({
-        //     filename: 'styles.[contenthash].css'
-        // }),
+        new MiniCssExtractPlugin({
+            filename: 'styles.[contenthash].css'
+        }),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [
                 '**/*'
