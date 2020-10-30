@@ -12,7 +12,6 @@ jobs:
             docker-compose build
             docker-compose up -d
             docker-compose run guru-app npm test
-            docker-compose logs
       - run:
           name: Push app Docker image
           command: |
@@ -37,6 +36,18 @@ jobs:
             ssh-keyscan -H $GURU_BLUE_IP >> ~/.ssh/known_hosts
             scp docker-compose.prod.yml circleci@$GURU_BLUE_IP:.
             ssh circleci@$GURU_BLUE_IP "printf 'NODE_ENV=production\nPOSTGRES_HOST=$POSTGRES_HOST\nPOSTGRES_PORT=$POSTGRES_PORT\nPOSTGRES_DB=$POSTGRES_DB\nPOSTGRES_USER=$POSTGRES_USER\nPOSTGRES_PASS=$POSTGRES_PASS\nPOSTGRES_SSL=$POSTGRES_SSL' > config.prod.env && docker login --username $DOCKER_HUB_USER_ID --password $DOCKER_HUB_PWD && docker pull jdwilson2005/guru-app && docker pull jdwilson2005/guru-ui && docker-compose -f docker-compose.prod.yml up -d"
+  build_dev:
+    docker:
+      - image: circleci/node:jessie
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: run tests
+          command: |
+            docker-compose build
+            docker-compose up -d
+            docker-compose run guru-app npm test
 
 workflows:
   version: 2
@@ -51,3 +62,10 @@ workflows:
                 - develop
                 - /feature-.*/
                 - /rc-.*/
+  build_dev:
+    jobs:
+      - build_dev:
+          filters:
+            branches:
+              only:
+                - develop
