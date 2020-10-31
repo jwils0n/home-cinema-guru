@@ -29,7 +29,8 @@ services:
   guru-ui:
     build: ./ui
     container_name: guru-ui
-    restart: unless-stopped
+    volumes:
+      - .:/usr/src/app/:rw
     ports:
       - 80:80
     links:

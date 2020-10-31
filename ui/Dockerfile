@@ -1,9 +1,13 @@
 ### STAGE 1: Build UI app ###
 FROM node:12.7-alpine AS build
-WORKDIR /usr/src/app
+
+WORKDIR /tmp
 COPY package.json ./
-RUN yarn
+RUN yarn install
+
+WORKDIR /usr/src/app
 COPY . .
+RUN cp -a /tmp/node_modules .
 RUN yarn build
 
 ### STAGE 2: Run NGINX server ###

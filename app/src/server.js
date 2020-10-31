@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const { Client } = require('pg');
 
 // Constants
@@ -22,6 +23,11 @@ dbClient.connect();
 
 // App
 const app = express();
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(cors());
+}
+
 app.get('/api', (req, res) => {
   dbClient.query('SELECT * FROM speakers', (err, dbres) => {
     if (err) {
