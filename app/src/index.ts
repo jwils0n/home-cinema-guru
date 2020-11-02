@@ -1,16 +1,16 @@
-const express = require('express');
-const cors = require('cors');
-const { Client } = require('pg');
+import express from 'express';
+import cors from 'cors';
+import { Client, ClientConfig } from 'pg';
 
 // Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-const dbParams = {
+const dbParams: ClientConfig = {
   user: process.env.POSTGRES_USER,
   host: process.env.POSTGRES_HOST,
   password: process.env.POSTGRES_PASS,
-  port: process.env.POSTGRES_PORT,
+  port: parseInt(process.env.POSTGRES_PORT, 10),
   database: process.env.POSTGRES_DB
 }
 
@@ -29,6 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/api', (req, res) => {
+  // res.send('noooode');
   dbClient.query('SELECT * FROM speakers', (err, dbres) => {
     if (err) {
       res.send(err);

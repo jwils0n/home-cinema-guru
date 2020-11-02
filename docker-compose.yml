@@ -17,8 +17,11 @@ services:
   guru-app:
     build: ./app
     container_name: guru-app
+    command: yarn start:dev
     env_file:
       - ./config.dev.env
+    volumes:
+      - ./app:/usr/src/app
     ports:
       - 8080:8080
     links:
