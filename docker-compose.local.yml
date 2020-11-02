@@ -1,0 +1,37 @@
+version: '3'
+services:
+  guru-postgres:
+    image: postgres:9.6-alpine
+    container_name: guru-postgres
+    volumes:
+      - guru-dev-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=guru
+      - POSTGRES_USER=guru
+      - POSTGRES_PASSWORD=guru
+    networks:
+      - app-network
+
+  guru-app:
+    build: ./app
+    container_name: guru-app
+    command: yarn start:dev
+    env_file:
+      - ./config.dev.env
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - 8080:8080
+    links:
+      - guru-postgres
+    networks:
+      - app-network
+
+volumes:
+  guru-dev-data: 
+
+networks:
+  app-network:
+    driver: bridge

@@ -29,7 +29,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/api', (req, res) => {
-  // res.send('noooode');
   dbClient.query('SELECT * FROM speakers', (err, dbres) => {
     if (err) {
       res.send(err);
