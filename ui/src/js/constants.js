@@ -7,7 +7,6 @@ const apiUrls = {
 };
 
 function buildApiUrls(urls) {
-    console.log(process.env.NODE_ENV);
     return Object.keys(urls).reduce((acc, key) => {
         const baseUrl = process.env.NODE_ENV === 'development' ? BASE_API_URL_LOCAL : BASE_API_URL;
         acc[key] = `${baseUrl}${urls[key]}`;
@@ -16,5 +15,6 @@ function buildApiUrls(urls) {
 }
 
 export default {
-    apiUrls: buildApiUrls(apiUrls)
+    apiUrls: buildApiUrls(apiUrls),
+    CDN_URL: 'https://homecinemaguru.nyc3.digitaloceanspaces.com'
 };

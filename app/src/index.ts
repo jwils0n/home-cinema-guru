@@ -29,7 +29,13 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.get('/api', (req, res) => {
-  dbClient.query('SELECT * FROM speakers', (err, dbres) => {
+  dbClient.query(`
+    SELECT speakers.uuid, speakers.name, speakers.slug, price, brands.name as brand_name
+    FROM public.speakers
+    INNER JOIN public.brands ON (speakers.brand_id = brands.uuid)
+    WHERE type LIKE 'floorstanding'
+    LIMIT 10;
+  `, (err, dbres) => {
     if (err) {
       res.send(err);
       return;

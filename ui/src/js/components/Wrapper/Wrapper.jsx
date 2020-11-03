@@ -1,5 +1,6 @@
 import React from 'react';
 import TestService from '../../services/TestService';
+import constants from '../../constants';
 import styles from './wrapper.scss'
 
 export default class Wrapper extends React.Component {
@@ -15,12 +16,26 @@ export default class Wrapper extends React.Component {
     }
     render() {
         return (
-            <div className={styles.wrapper}>
+            <div className="container">
                 <h1>Welcome to the Home Cinema Guru!</h1>
                 <p>Here's some raw data:</p>
-                <table>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <td>Brand</td>
+                            <td>Name</td>
+                            <td>Price</td>
+                        </tr>
+                    </thead>
                     <tbody>
-                        {this.state.rows.map(row => <tr key={row.id}><td>{row.id}</td><td>{row.name}</td><td>{row.price}</td></tr>)}
+                        {this.state.rows.map(row => (
+                            <tr key={row.uuid}>
+                                <td><img height="100" width="100" src={`${constants.CDN_URL}/speakers/large/${row.slug}.jpg`} /></td>
+                                <td>{row.brand_name}</td>
+                                <td>{row.name}</td>
+                                <td>{row.price}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
