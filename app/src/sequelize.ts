@@ -8,12 +8,15 @@ async function initialize() {
         password: process.env.POSTGRES_PASS,
         port: parseInt(process.env.POSTGRES_PORT, 10),
         database: process.env.POSTGRES_DB,
-        dialect: 'postgres',
+        dialect: 'postgres'
     };
 
     if (process.env.POSTGRES_SSL) {
-        // dbParams.ssl = { rejectUnauthorized: false };
-        dbParams.ssl = true;
+        dbParams.dialectOptions = {
+            ssl: {
+                rejectUnauthorized: false
+            }
+        };
     }
 
     const sequelize = new Sequelize(dbParams);
