@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import sequelize from './sequelize';
 import Speaker from './models/Speaker';
 import Brand from './models/Brand';
@@ -14,6 +15,8 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') {
   app.use(cors());
 }
+
+app.use(helmet());
 
 app.get('/api', (req, res) => {
   Speaker.findAll({

@@ -16,5 +16,5 @@ function buildApiUrls(urls) {
 
 export default {
     apiUrls: buildApiUrls(apiUrls),
-    CDN_URL: 'https://homecinemaguru.nyc3.digitaloceanspaces.com'
+    CDN_URL: 'https://homecinemaguru.nyc3.cdn.digitaloceanspaces.com'
 };

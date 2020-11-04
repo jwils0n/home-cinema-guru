@@ -24,6 +24,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "helmet": "^4.2.0",
     "pg": "^8.4.2",
     "pg-hstore": "^2.3.3",
     "reflect-metadata": "^0.1.13",
