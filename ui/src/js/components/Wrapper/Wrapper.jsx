@@ -22,7 +22,7 @@ export default class Wrapper extends React.Component {
                 <table className="table">
                     <thead>
                         <tr>
-                            <td>Image</td>
+                            {/* <td>Image</td> */}
                             <td>Brand</td>
                             <td>Name</td>
                             <td>Price</td>
@@ -31,7 +31,7 @@ export default class Wrapper extends React.Component {
                     <tbody>
                         {this.state.rows.map(row => (
                             <tr key={row.id}>
-                                <td><img height="100" width="100" src={`${constants.CDN_URL}/speakers/large/${row.slug}.jpg`} /></td>
+                                {/* <td><img height="100" width="100" src={`${constants.CDN_URL}/speakers/large/${row.slug}.jpg`} /></td> */}
                                 <td>{row.brand.name}</td>
                                 <td>{row.name}</td>
                                 <td>{row.price}</td>

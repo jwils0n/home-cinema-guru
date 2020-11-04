@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import sequelize from './sequelize';
-import Speaker from './models/Speaker';
-import Brand from './models/Brand';
+import routes from './api'
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -17,19 +17,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use(helmet());
-
-app.get('/api', (req, res) => {
-  Speaker.findAll({
-    attributes: ['id', 'name', 'slug', 'price'],
-    include: [{
-      model: Brand
-    }],
-    where: { type: 'floorstanding' },
-    limit: 10
-  }).then(resp => {
-    res.send(resp);
-  });
-});
+app.use(bodyParser.json());
+app.use('/api', routes());
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

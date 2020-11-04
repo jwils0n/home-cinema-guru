@@ -3,7 +3,7 @@ const BASE_API_URL_LOCAL = 'http://localhost:8080/';
 const BASE_API_URL = '/';
 
 const apiUrls = {
-    TEST_URL: 'api'
+    TEST_URL: 'api/speakers'
 };
 
 function buildApiUrls(urls) {
