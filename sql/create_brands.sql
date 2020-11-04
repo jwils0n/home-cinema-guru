@@ -1,13 +1,13 @@
-CREATE TABLE public.brands
+CREATE TABLE public.Brands
 (
-    uuid uuid NOT NULL,
+    id uuid NOT NULL,
     name character varying(128),
     slug character varying(128),
-    PRIMARY KEY (uuid)
+    PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
 );
 
-ALTER TABLE public.brands
+ALTER TABLE public.Brands
     OWNER to doadmin;

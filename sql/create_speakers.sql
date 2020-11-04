@@ -1,6 +1,6 @@
-CREATE TABLE public.speakers
+CREATE TABLE public.Speakers
 (
-    uuid uuid NOT NULL,
+    id uuid NOT NULL,
     brand_id uuid,
     name character varying(128),
     slug character varying(128),
@@ -43,11 +43,11 @@ CREATE TABLE public.speakers
     power_range_max smallint,
     frequency_response_low_hz smallint,
     frequency_response_high_khz smallint,
-    PRIMARY KEY (uuid)
+    PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
 );
 
-ALTER TABLE public.speakers
+ALTER TABLE public.Speakers
     OWNER to doadmin;
