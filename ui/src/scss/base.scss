@@ -2,6 +2,23 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/lux/bootswatch";
 
-body {
-    margin-top: 20px;
+.form-check-input,
+.form-check-label {
+    cursor: pointer;
+}
+
+.form-control-lg {
+    height: 1.5rem;
+    padding: 1.5rem;
+
+    .form-check-label {
+        vertical-align: top;
+        margin-left: 1rem;
+    }
+
+    .form-check-input {
+        top: 1.2rem;
+        width: 1.5rem;
+        height: 1.5em;
+    }
 }

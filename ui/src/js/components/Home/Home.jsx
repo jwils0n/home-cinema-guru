@@ -1,9 +1,8 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import TestService from '../../services/TestService';
-import constants from '../../constants';
-import styles from './wrapper.scss'
 
-export default class Wrapper extends React.Component {
+export default class Home extends React.Component {
     constructor(props) {
         super(props);
 
@@ -15,6 +14,7 @@ export default class Wrapper extends React.Component {
 
         this.state = { rows: [] };
     }
+
     render() {
         return (
             <div className="container wrapper">
@@ -24,8 +24,7 @@ export default class Wrapper extends React.Component {
                     <hr className="my-4" />
                     <p>Aenean venenatis a orci at ultrices. Nullam ultrices dignissim nisl. Praesent rutrum, turpis ut ornare gravida, neque nibh auctor nulla, ut semper ligula purus non tortor. Integer venenatis tellus urna, nec feugiat risus pellentesque quis. Mauris dapibus tincidunt dignissim. Aenean pharetra blandit nunc quis vehicula..</p>
                     <p>
-                        <button className="btn btn-primary btn-lg mr-1">Start from scratch</button>
-                        <button className="btn btn-primary btn-lg">Start using existing components</button>
+                        <Link to="/questionnaire" className="btn btn-primary btn-lg mr-1">Start building</Link>
                     </p>
                 </div>
             </div>

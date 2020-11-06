@@ -6,11 +6,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const distPath = path.resolve(__dirname, './dist');
 
 module.exports = {
-    entry: './src/js/index.js',
+    entry: './src/js/index.jsx',
     output: {
         filename: 'bundle.[contenthash].js',
         path: distPath,
-        publicPath: ''
+        publicPath: '/'
     },
     mode: 'none',
 
