@@ -1,9 +1,11 @@
 
+import QUESTIONNAIRE from './questionnaire';
+
 const BASE_API_URL_LOCAL = 'http://localhost:8080/';
 const BASE_API_URL = '/';
 
 const apiUrls = {
-    TEST_URL: 'api/speakers'
+    COMPONENTS_URL: 'api/components'
 };
 
 function buildApiUrls(urls) {
@@ -15,6 +17,7 @@ function buildApiUrls(urls) {
 }
 
 export default {
+    QUESTIONNAIRE,
     apiUrls: buildApiUrls(apiUrls),
     CDN_URL: 'https://homecinemaguru.nyc3.cdn.digitaloceanspaces.com'
 };

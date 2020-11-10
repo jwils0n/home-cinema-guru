@@ -1,5 +1,6 @@
 @import "~bootswatch/dist/lux/variables";
 @import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-slider/dist/css/bootstrap-slider.css";
 @import "~bootswatch/dist/lux/bootswatch";
 
 .form-check-input,
@@ -13,12 +14,35 @@
 
     .form-check-label {
         vertical-align: top;
-        margin-left: 1rem;
+        padding-left: 1rem;
     }
 
     .form-check-input {
         top: 1.2rem;
         width: 1.5rem;
         height: 1.5em;
+    }
+}
+
+.slider {
+    &.slider-horizontal {
+        width: 100%;
+    }
+    
+
+    .slider-track,
+    .slider-selection,
+    .slider-track-low,
+    .slider-track-high {
+        border-radius: 0;
+    }
+
+    .slider-handle {
+        background-color: #000;
+        background-image: none;
+
+        &.round {
+            border-radius: 0;
+        }
     }
 }

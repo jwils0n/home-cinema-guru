@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import speakers from './routes/speakers';
+import components from './routes/components';
 
 export default () => {
 	const app = Router();
-	speakers(app);
+	components(app);
 
 	return app
 }

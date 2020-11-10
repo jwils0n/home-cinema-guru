@@ -1,18 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import TestService from '../../services/TestService';
 
 export default class Home extends React.Component {
     constructor(props) {
         super(props);
-
-        const testService = new TestService();
-        testService.get().then(({ data: rows }) => {
-            console.log(rows);
-            this.setState({ rows });
-        });
-
-        this.state = { rows: [] };
     }
 
     render() {
