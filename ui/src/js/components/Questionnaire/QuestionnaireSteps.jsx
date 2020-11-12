@@ -41,11 +41,9 @@ class QuestionnaireSteps extends React.Component {
 
         return (
             <section>
-                <h1>First, a few questions...</h1>
-
                 <QuestionnaireForm save={this.save} value={stepValue} questionNumber={stepId + 1} {...step} />
 
-                <div className="form-group">
+                <div className="form-group mb-4 mt-5">
                     { stepId < QUESTIONNAIRE.QUESTIONS.length - 1 &&
                         <Link to={`/questionnaire/${stepId + 1}`} className={`btn btn-primary ${disabledClass}`}>Next</Link>
                     }

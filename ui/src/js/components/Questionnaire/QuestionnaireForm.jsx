@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactBootstrapSlider from 'react-bootstrap-slider';
+import styles from './QuestionnaireForm.scss';
 
 const USAGE_FORM_DEFAULTS = ['50', '50', '0'];
 
@@ -8,7 +9,8 @@ export default class QuestionnaireForm extends React.Component {
         super(props);
 
         this.state = {
-            values: {}
+            values: {},
+            followUpActive: false
         }
     }
 
@@ -65,15 +67,23 @@ export default class QuestionnaireForm extends React.Component {
             value = valueArr;
         }
 
+        if (this.props.followUp && value == true) {
+            this.setState({ followUpActive: true })
+        } else {
+            this.setState({ followUpActive: false })
+        }
+
         const values = { ...this.state.values, [name]: value };
         this.setState({ values });
 
         this.props.save(name, value);
     }
 
-    render() {
-        const { question, choices, type, binding, value, questionNumber } = this.props;
+    FormControl = (props) => {
+        const { choices, type, binding, value, followUp } = props;
         let form;
+
+        console.log(binding, value, choices);
     
         switch(type) {
             case 'bool':
@@ -87,7 +97,7 @@ export default class QuestionnaireForm extends React.Component {
                                 id="bool-field-true"
                                 value="1"
                                 onChange={this.onChange}
-                                checked={value === '1'}
+                                checked={value === '1' || followUp && value != 0}
                             />
                             <label className="form-check-label" htmlFor="bool-field-true">Yes</label>
                         </div>
@@ -224,6 +234,17 @@ export default class QuestionnaireForm extends React.Component {
                     </React.Fragment>
                 )
                 break;
+            case 'compactchoice':
+                form = (
+                    <React.Fragment>
+                        <label htmlFor="">Please elaborate</label>
+                        <select className="form-control" name={binding} defaultValue={value} onChange={this.onChange}>
+                            <option></option>
+                            { choices.map(choice => <option key={choice}>{choice}</option>) }
+                        </select>
+                    </React.Fragment>
+                )
+                break;
             default:
                 form = (
                     <div className="form-group">
@@ -231,11 +252,30 @@ export default class QuestionnaireForm extends React.Component {
                     </div>
                 )
         }
+
+        return form;
+    }
+
+    render() {
+        const { question, explanation, questionNumber, followUp, value } = this.props;
+        
         return (
-            <div className="form mb-4">
-                <h2>{`${questionNumber}. ${question}`}</h2>
+            <div className="form">
+                <div className={styles.questionnaireFormHeader}>
+                    <h2>
+                        <span className={styles.questionnaireNumber}>{`${questionNumber}.`}</span>
+                        <span className={styles.questionnaireQuestion}>{question}</span>
+                    </h2>
+                    <h5 className="text-muted">{explanation}</h5>
+                </div>
                 <div className="form-group">
-                    {form}
+                    <this.FormControl {...this.props} />
+
+                    { (this.state.followUpActive || (followUp && value != 0)) && (
+                        <div className="mt-3">
+                            <this.FormControl {...followUp} binding={this.props.binding} />
+                        </div>
+                    ) }
                 </div>
             </div>
         );

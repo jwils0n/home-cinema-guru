@@ -11,7 +11,7 @@ export default function QuestionnaireReview(props) {
             <h1>Review your responses</h1>
             
             { responses && responses.map(response => (
-                <p>{`${response.name}: ${response.value}`}</p>
+                <p key={response.name}>{`${response.name}: ${response.value}`}</p>
             )) }
 
             { !responses && (

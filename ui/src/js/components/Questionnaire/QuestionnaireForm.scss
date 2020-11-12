@@ -1,0 +1,22 @@
+.questionnaireFormHeader {
+    h2 {
+        padding-left: 50px;
+    }
+
+    h5 {
+        padding-left: 50px;
+        text-transform: none;
+        letter-spacing: 1px;
+    }
+}
+
+.questionnaireNumber {
+    display: inline-block;
+    width: 50px;
+    margin-left: -50px;
+    vertical-align: top;
+}
+
+.questionnaireQuestion {
+    display: inline-block;
+}
